@@ -59,7 +59,7 @@
 
 			<div class="btn-list">
 			<!-- <div class="list-group"> -->
-				<a class="btn btn-default btn-block" ng-click="switchSession(account._id)" ng-repeat="account in $root.user.availableAccounts | orderBy:'title'">
+				<a class="btn btn-default btn-block" ng-click="switchSession(account._id)" ng-repeat="account in availableAccounts | orderBy:'title'">
 				
 				<span>{{account.title}}</span>
 				<i class="fa fa-sign-in pull-right"></i>

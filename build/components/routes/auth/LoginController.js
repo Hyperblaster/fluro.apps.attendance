@@ -1,11 +1,29 @@
 /////////////////////////////////////////////////////
 
-app.controller('LoginController', function($scope, $state, Fluro, FluroTokenService) {
+app.controller('LoginController', function($rootScope, $scope, $state, Fluro, FluroContent, FluroTokenService) {
 
     //Create credentials defaulting to local storage
     $scope.credentials = {
         remember: true,
     };
+
+    ////////////////////////////////////////////
+
+    function refreshAccounts() {
+        FluroContent.endpoint('user/accounts').query().$promise.then(function(res) {
+            $scope.availableAccounts = res;
+        }, function(res) {
+            console.log('Failed to load accounts', res)
+        })
+    }
+
+    ////////////////////////////////////////////
+    
+    $scope.$watch('user', function(user) {
+        if(user) {
+         refreshAccounts();
+        }
+    })
 
     ////////////////////////////////////////////
 
@@ -52,6 +70,7 @@ $scope.login = function() {
     request.success(function(res) {
         console.log('Login Successful!', res);
         $scope.processing = false;
+
     })
 
     //If we failed then tell the user
