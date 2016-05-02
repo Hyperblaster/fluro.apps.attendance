@@ -1,0 +1,90 @@
+<div class="wrapper" ng-switch="counter.status">
+
+	<div class="container text-center" ng-switch-when="processing">
+		<i class="fa fa-spinner fa-spin"></i>
+		<h3>Sending</h3>
+	</div>
+
+	<div class="container text-center" ng-switch-when="failed">
+		<i class="fa fa-warning"></i>
+		<h3>Failed!</h3>
+		<p>Sorry there was an issue sending your report, please try again</p>
+		<a class="btn btn-primary" ng-click="counter.status = 'ready'">
+			<i class="fa fa-angle-left"></i>
+			<span>Back</span>
+		</a>
+	</div>
+
+
+	<div class="container text-center" ng-switch-when="success">
+		<i class="fa fa-check"></i>
+		<h3>Success</h3>
+		<p>Thanks {{$root.user.name}}. Your attendance report has been submitted successfully!</p>
+		<a class="btn btn-primary" ng-click="reset()">
+			<span>Back</span>
+			<i class="fa fa-chevron-right"></i>
+		</a>
+	</div>
+
+	<div class="container text-center" ng-switch-default>
+		
+		<div class="row">
+			<div class="col-xs-4">
+				<a class="btn btn-circle btn-circle-default" style="border:none !important;" ng-click="reset()">
+					<i class="fa fa-rotate-right"></i>
+				</a>
+			</div>
+			<div class="col-xs-8">
+				<input type="tel" class="total {{quantity()}}" pattern="[0-9]*" select-on-focus ng-model="counter.count" inputmode="numeric">
+
+				<!-- <input class="total {{quantity()}}"  select-on-focus ng-model="counter.count"/> -->
+				<!-- <h1 class="total">{{counter.count}}</h1> -->
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="btn btn-circle btn-circle-primary btn-xl" ng-click="add()">
+					+
+					<!-- <i class="fa fa-plus"></i> -->
+				</a>
+			</div>
+			<div class="col-xs-6">
+				<a class="btn btn-circle btn-circle-danger btn-lg" ng-click="subtract()">
+					-
+					<!-- <i class="fa fa-minus"></i> -->
+				</a>
+			</div>
+
+			
+		</div>
+	<hr/>
+
+	<div class="row">
+		<div class="form-group col-xs-9">
+			<select class="form-control" ng-model="counter.event">
+				<option value="">Select Event</option>
+				<option value="{{event._id}}" ng-repeat="event in eventService.events">{{event.title}} - {{event.startDate| formatDate:'g:ia'}}</option>
+			</select>
+		</div>
+		<div class="col-xs-3">
+			<a class="btn btn-default btn-block" ng-click="refreshEvents()">
+				<i class="fa" ng-class="{'fa-refresh':!refreshing, 'fa-spinner fa-spin':refreshing}"></i>
+			</a>
+		</div>
+		</div>
+
+		<a class="btn btn-primary btn-block" ng-click="submit()" ng-disabled="!eventService.events.length || !counter.count||!counter.event.length">
+			<span>Submit</span>
+			<i class="fa fa-angle-right"></i>
+		</a>
+
+		<!-- <a class="btn btn-default btn-block" ui-sref="auth">
+		<i class="fa fa-angle-left"></i>
+			<span>Back</span>
+			
+		</a> -->
+	
+
+	</div>
+</div>

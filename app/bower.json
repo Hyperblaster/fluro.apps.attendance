@@ -1,0 +1,23 @@
+{
+  "name": "fluro-mobile-app",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "*",
+    "angular-animate": "^1.3.0",
+    "angular-bootstrap": "~0.13.3",
+    "angular-resource": "^1.3.0",
+    "angular-touch": "^1.3.0",
+    "angular-ui-router": "~0.2.13",
+    "fluro.config": "*",
+    "fluro.content": "*",
+    "fluro.util": "*",
+    "font-awesome": "~4.2.0",
+    "lodash": "~3.4.0",
+    "ngstorage": "~0.3.10"
+  },
+  "appPath": "app",
+  "resolutions": {
+    "angular": "1.4.8",
+    "angular-bootstrap": "~0.13.3"
+  }
+}
